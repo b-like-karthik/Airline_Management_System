@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial','sans-serif';
+}
+
+body {
+    background-color: black;
+    overflow-x: hidden;
+}
+
+.bg {
+    background-color: rgba(50, 50, 50, 0.65);
+}
+
+.navbar {
+    background-color: rgb(147, 30, 210);
+}
+
+.nav-link {
+    color:white;
+}
+
+.welcome {
+    position:absolute;
+    top:calc(20%);
+    left:calc(50%);
+}
+
+.welcome:hover {
+    color:white;
+}
+
+.logout {
+    position:absolute;
+    top:calc(20%);
+    left:calc(85%);
+}
+
+.logout:hover {
+    color:navy;
+}
+
+#add-flights.container {
+    position:absolute;
+    top:calc(20%);
+    border-radius: calc(3%);
+}
+
+.btn:hover {
+    background-color: green;
+}
+
+.button1 {
+    margin-left: calc(37.5%);
+}
+
+#revenue.container {
+    position:absolute;
+    top:calc(30%);
+    border-radius: calc(3%);
+    left:calc(60%);
+}
+
+.button2 {
+    margin-left: calc(32.5%);
+}
+
+#occ-rate.container {
+    position:absolute;
+    top:calc(100%);
+    border-radius: calc(3%);
+    left:calc(60%);
+}
+
+#add-aircraft.container {
+    position:absolute;
+    top:calc(180%);
+    border-radius: calc(3%);
+    left:calc(5%);
+}
+
+.button3 {
+    margin-left: calc(37.5%);
+}
+
+#add-aircraft-type.container {
+    position:absolute;
+    top:calc(175%);
+    border-radius: calc(3%);
+    left:calc(55%);
+}
+
+.button4 {
+    margin-left: calc(32.5%);
+}
+
+#cancel-flight.container {
+    position:absolute;
+    top:calc(290%);
+    border-radius: calc(3%);
+    left:calc(10%);
+}
+
+.button5 {
+    margin-left: calc(37.5%);
+}
+
+
+
+
+
+
+
+
