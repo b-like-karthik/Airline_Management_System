@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Tahoma", sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    position: relative;
+    left: 12.4rem;
+    font-size: 0.8rem;
+}
+
+a:hover {
+    color: red;
+}
+
+.background-image {
+    /* The image used */
+    background-image: url("Images/Login\ Image.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-box {
+    position: relative;
+    top: 2rem;
+    left: 16.5rem;
+    right: 5rem;
+    margin-left: 12.5rem;
+    margin-right: 12.5rem;
+    width: 20%;
+    height: 70%;
+    padding: 3.7rem;
+    background-color: white;
+    border-radius: 10%;
+}
+
+.Title {
+    position: relative;
+    left: 4.5rem;
+    font-size: 2.5rem;
+}
+
+.form-details {
+    position: relative;
+    font-size: 1.25rem;
+}
+
+label.form-details {
+    font-weight:  bold;
+    position: relative;
+    right: 2rem;
+}
+
+input.styling {
+    position: relative;
+    border-radius: 5%;
+    padding: 1.25rem;
+    margin: 0.5rem;
+    background-color: rgb(239, 193, 107);
+    color: rgba(1,1,122,1.0);
+    font-weight: bold;
+    right: 2.7rem;
+}
+
+.login-btn {
+    position: relative;
+    background-color: rgba(1,1,122,1.0);
+    left: 3.5rem;
+    width: 60%;
+    padding: 0.6rem;
+    top: 0.7rem;
+    border-radius: 0.9rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: green;
+}
+
+
+
+.Invalid {
+    color: red;
+    position: relative;
+    top: 1rem;
+    left: 37%;
+}
+
