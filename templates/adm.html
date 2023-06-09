@@ -1,0 +1,807 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static '123.css' %}">
+    <title>Admin-Page</title>
+    <style>
+      #manage-fpk.container {
+        position:absolute;
+        top:calc(385%);
+        left:29%;
+        border-radius: calc(3%);
+    }
+    </style>
+    <script>
+      
+      function checkInputs1(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input11 = document.getElementById("input11").value;
+        var input12 = document.getElementById("input12").value;
+        var input13 = document.getElementById("input13").value;
+        var input14 = document.getElementById("input14").value;
+        var input15 = document.getElementById("input15").value;
+        var input16 = document.getElementById("input16").value;
+        var input17 = document.getElementById("input17").value;
+        var input18 = document.getElementById("input18").value;
+        var input11_split = input11.split(', ')[0];
+        var input12_split = input12.split(', ')[0];
+        var message = 'Flight number: ' + input13 + ' from ' + input11_split + ' to ' + input12_split + ' has been successfully added';
+        document.getElementById("success-message").innerHTML = message;
+        // Check if the values match
+        if ((input11 == input12)) {
+          // Display the modal box
+          $('#Modal11').modal('show');
+        }
+        if((input16 == input17)) {
+          // Display the modal box
+          $('#Modal12').modal('show');
+        }
+        if(input11 && input12 && input13 && input14 && input15 && input16 && input17)
+        {
+           // Display the modal box
+           $('#Modal13').modal('show');
+        }
+      }
+
+      function checkInputs2(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input21 = document.getElementById("input21").value;
+        var input22 = document.getElementById("input22").value;
+        // Check if the values match
+        if ((input21 == input22)) {
+          // Display the modal box
+          $('#Modal21').modal('show');
+        }
+      }
+
+      function checkInputs3(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input31 = document.getElementById("input31").value;
+        var input32 = document.getElementById("input32").value;
+        var message = 'Generated Revenue' + ' from ' + input31 + ' to ' + input32 + ' is ';
+        document.getElementById("message1").innerHTML = message;
+        // Check if the values match
+        if((input31 && input32))
+        {
+          // Display the modal box
+          $('#Modal31').modal('show');
+        }
+      }
+
+      function checkInputs4(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input41 = document.getElementById("input41").value;
+        var input42 = document.getElementById("input42").value;
+        var input43 = document.getElementById("input43").value;
+        var input44 = document.getElementById("input44").value;
+        var input45 = document.getElementById("input45").value;
+        var message = 'New Aircraft' + ' Flight number: ' + input42 + ' ' + input41 + ' has been added successfully';
+        document.getElementById("message2").innerHTML = message;
+        // Check if the values match
+        if((input41 && input42 && input43 && input44 && input45))
+        {
+          // Display the modal box
+          $('#Modal41').modal('show');
+        }
+      }
+
+      function checkInputs5(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input51 = document.getElementById("input51").value;
+        var input52 = document.getElementById("input52").value;
+        var input53 = document.getElementById("input53").value;
+        var input54 = document.getElementById("input54").value;
+        var input55 = document.getElementById("input55").value;
+        var input56 = document.getElementById("input56").value;
+        var message = 'New Aircraft Type' + input51 + ' has been added successfully';
+        document.getElementById("message3").innerHTML = message;
+        // Check if the values match
+        if((input51 && input52 && input53 && input54 && input55 && input56))
+        {
+          // Display the modal box
+          $('#Modal51').modal('show');
+        }
+      }
+
+      function checkInputs6(event) {
+
+        event.preventDefault();
+
+        // Get the values of the inputs
+        var input61 = document.getElementById("input61").value;
+        var input62 = document.getElementById("input62").value;
+        var input63 = document.getElementById("input63").value;
+        var message = 'Flight Nnumber: ' + input61 + ' scheduled on ' + input62 + ' at ' + input63 + ' has been cancelled successfully';
+        document.getElementById("message4").innerHTML = message;
+        // Check if the values match
+        if((input61 && input62 && input63))
+        {
+          // Display the modal box
+          $('#Modal61').modal('show');
+        }
+      }
+    </script>
+</head>
+<body>
+  {% if disable_back_button %}
+      <script>
+          history.pushState(null, null, location.href);
+          window.onpopstate = function (event) {
+              history.pushState(null, null, location.href);
+              event.preventDefault();
+          };
+      </script>
+  {% endif %}
+    <!--                                Navbar                           -->
+    <nav class="navbar navbar-expand-sm fixed-top">
+      <a class="navbar-brand fs-4 text-white" href="#">
+        <img src="{% static './Images/manager.png' %}" style="width:25%; margin-left:3%">  Admin Panel
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link fs-5 welcome" href="#">Welcome Admin!!</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-5 logout" href="/accounts/logout">
+            <img src="{% static './Images/logout.png' %}" style="width:15%">  Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!--                           Navbar completed                       -->
+
+    <!--                             Add-Flights                          -->
+    <div class="container text-white bg" style="width:50%" id="add-flights">
+      <br />
+      <h2 style="text-align:center">Add Flight</h2>
+      <br />
+     <form action="{% url 'add_flight' %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Departure">Departure:</label>
+          <input class="form-control" name="departure" style="color:navy; font-weight:bold" type="text" id="input11" list="cities1" placeholder="SELECT" required/>
+          <datalist id="cities1">
+            <option value="Ahmedabad, India">Sardar Vallabhai Patel International Airport</option>
+            <option value="Bengaluru, India">Bengaluru International Airport</option>
+            <option value="Bhubaneshwar, India">Biju Patnaik International Airport</option>
+            <option value="Chennai,India">Chennai International Airport</option>
+            <option value="Goa, India">Netaji Subhash Chandra Bose International Airport</option>
+            <option value="Hyderabad, India">Rajiv Gandhi International Airport</option>
+            <option value="Jaipur, India">Jaipur International Airport</option>
+            <option value="Kochi, India">Cochin International Airport</option>
+            <option value="Kolkata, India">Netaji Subhash Chandra Bose International Airport</option>
+            <option value="Mumbai, India">Chhatrapati Shivaji Maharaj International Airport</option>
+            <option value="New Delhi, India">Indira Gandhi International Airport</option>
+            <option value="Portblair(Andaman and Nicobar Islands), India">Veer Savarkar International Airport</option>
+            <option value="Varanasi, India">Lal Bahadur Sastri International Airport</option>
+            <option value="Vizag, India">Visakhapatnam International Airport</option>
+        </datalist>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Destination">Destination:</label>
+          <input class="form-control" name="destination" style="color:navy; font-weight:bold" type="text" id="input12" list="cities2" placeholder="SELECT" required/>
+          <datalist id="cities2">
+           <option value="Ahmedabad, India">Sardar Vallabhai Patel International Airport</option>
+           <option value="Bengaluru, India">Bengaluru International Airport</option>
+           <option value="Bhubaneshwar, India">Biju Patnaik International Airport</option>
+           <option value="Chennai,India">Chennai International Airport</option>
+           <option value="Goa, India">Netaji Subhash Chandra Bose International Airport</option>
+           <option value="Hyderabad, India">Rajiv Gandhi International Airport</option>
+           <option value="Jaipur, India">Jaipur International Airport</option>
+           <option value="Kochi, India">Cochin International Airport</option>
+           <option value="Kolkata, India">Netaji Subhash Chandra Bose International Airport</option>
+           <option value="Mumbai, India">Chhatrapati Shivaji Maharaj International Airport</option>
+           <option value="New Delhi, India">Indira Gandhi International Airport</option>
+           <option value="Portblair(Andaman and Nicobar Islands), India">Veer Savarkar International Airport</option>
+           <option value="Varanasi, India">Lal Bahadur Sastri International Airport</option>
+           <option value="Vizag, India">Visakhapatnam International Airport</option>
+          </datalist>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="flight-number">Flight Number:</label>
+          <input class="form-control" id="input13" name="plane_id" style="color:navy; font-weight:bold" type="text" placeholder="Flight Number" required/>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Departure-Day">Departure-Day:</label>
+          <input class="form-control" name="departure_day" style="color:navy; font-weight:bold" id="input14" list="weeks1" type="text" placeholder="SELECT" required/>
+          <datalist id="weeks1">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </datalist>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Arrival-Day">Arrival-Day:</label>
+          <input class="form-control" name="arrival_day" style="color:navy; font-weight:bold" id="input15" list="weeks2" type="text" placeholder="SELECT" required/>
+          <datalist id="weeks2">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </datalist>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Departure-Time">Departure-Time:</label>
+          <input class="form-control" name="departure_time"  type="time" step="1" id="input16" style="color:navy; font-weight:bold" placeholder="Departure-Time" required/>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Arrival-Time">Arrival-Time:</label>
+          <input class="form-control" name="arrival_time" type="time" step="1" id="input17" style="color:navy; font-weight:bold" placeholder="Arrival-Time" required/>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col">
+          <label class="text-white fs-4" for="Distance">Distance(in km):</label>
+          <input class="form-control" name="distance"  type="number" step="50" id="input18" style="color:navy; font-weight:bold" placeholder="in kilometers" required/>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <button type="submit" class="btn btn-primary button1" data-toggle="modal" data-targert="#Modal1" id="submit-btn1" style="width:20%">Add Flight</button>
+      </div>
+    </form>
+      <br /><br />
+    </div>
+
+    <!--                              Error-Boxes                          -->
+    <div class="modal fade" id="Modal11">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Error!</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p>Invalid Input - Departure and Destination are same</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close11" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="Modal12">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Error!</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p>Invalid Input - Departure-Time and Arrival-Time are same</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close12" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="Modal13">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Added Successfully</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p id="success-message"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close13" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--                  Add-flights completed                      -->
+
+    <!--                         Revenue                             -->
+    <div class="container text-white bg" style="width:30%" id="revenue">
+       <br />
+      <h2 style="text-align:center;">Net Profit</h2>
+      <br />
+      <form action="{% url 'net_profit' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">From:</label>
+            <input class="form-control" name="from_" id="input31" type="date" placeholder="From" required/>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">To:</label>
+            <input class="form-control" name="to_" id="input32" type="date" placeholder="To" required/>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <button type="submit" class="btn btn-primary button2" style="width:35%;">Generate Revenue</button>
+        </div>
+        <br /><br />
+      </form>
+     </div>
+
+     <div class="modal fade" id="Modal31">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Revenue</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p id="message1"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="close31" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>     
+     <!--                       Revenue Completed                     -->
+
+     <!--                         Occupancy Rate                      -->
+    <div class="container text-white bg" style="width:30%" id="occ-rate">
+      <br />
+      <h2 style="text-align:center">Occupancy Rate</h2>
+      <br />
+      <br />
+      <form action="{% url 'getoccupancyrate' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Departure:</label>
+            <input class="form-control" name="departureplace" type="text" id="input21" list="cities3" placeholder="From" required/>
+            <datalist id="cities3">
+              <option value="Ahmedabad, India">Sardar Vallabhai Patel International Airport</option>
+              <option value="Bengaluru, India">Bengaluru International Airport</option>
+              <option value="Bhubaneshwar, India">Biju Patnaik International Airport</option>
+              <option value="Chennai,India">Chennai International Airport</option>
+              <option value="Goa, India">Netaji Subhash Chandra Bose International Airport</option>
+              <option value="Hyderabad, India">Rajiv Gandhi International Airport</option>
+              <option value="Jaipur, India">Jaipur International Airport</option>
+              <option value="Kochi, India">Cochin International Airport</option>
+              <option value="Kolkata, India">Netaji Subhash Chandra Bose International Airport</option>
+              <option value="Mumbai, India">Chhatrapati Shivaji Maharaj International Airport</option>
+              <option value="New Delhi, India">Indira Gandhi International Airport</option>
+              <option value="Portblair(Andaman and Nicobar Islands), India">Veer Savarkar International Airport</option>
+              <option value="Varanasi, India">Lal Bahadur Sastri International Airport</option>
+              <option value="Vizag, India">Visakhapatnam International Airport</option>
+             </datalist>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Destination:</label>
+            <input class="form-control" name="destiny" type="text"  id="input22" list="cities4" placeholder="To" required/>
+            <datalist id="cities4">
+              <option value="Ahmedabad, India">Sardar Vallabhai Patel International Airport</option>
+              <option value="Bengaluru, India">Bengaluru International Airport</option>
+              <option value="Bhubaneshwar, India">Biju Patnaik International Airport</option>
+              <option value="Chennai,India">Chennai International Airport</option>
+              <option value="Goa, India">Netaji Subhash Chandra Bose International Airport</option>
+              <option value="Hyderabad, India">Rajiv Gandhi International Airport</option>
+              <option value="Jaipur, India">Jaipur International Airport</option>
+              <option value="Kochi, India">Cochin International Airport</option>
+              <option value="Kolkata, India">Netaji Subhash Chandra Bose International Airport</option>
+              <option value="Mumbai, India">Chhatrapati Shivaji Maharaj International Airport</option>
+              <option value="New Delhi, India">Indira Gandhi International Airport</option>
+              <option value="Portblair(Andaman and Nicobar Islands), India">Veer Savarkar International Airport</option>
+              <option value="Varanasi, India">Lal Bahadur Sastri International Airport</option>
+              <option value="Vizag, India">Visakhapatnam International Airport</option>
+             </datalist>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <button type="submit" class="btn btn-primary button" style="width:45%;" >Get Occupancy Rate</button>
+        </div>
+        <br /><br />
+      </form>
+    </div>
+
+    <div class="modal fade" id="Modal21">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Error!</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p>Invalid Input - Departure and  Destination are same</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close21" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--                     Occupancy-Rate Completed                 -->
+
+    <!--                        Add-Aircraft                          -->
+    <div class="container bg text-white" style="width:40%;" id="add-aircraft">
+      <br />
+      <h2 style="text-align:center;">Add Aircraft</h2>
+      <br />
+       <form action="{% url 'add_plane' %}" method="post" >
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Aircraft Type:</label>
+            <input class="form-control" id="input41" name="type_" type="text" placeholder="Aircraft Type" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Flight Number:</label>
+            <input class="form-control" id="input42" name="plane_id" type="text" placeholder="Flight ID" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">First Class Fare:</label><br />
+            <input class="form-control" id="input43" name="first_fare" type="number" placeholder="First Class Fare" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Business Class Fare:</label><br />
+            <input class="form-control" id="input44" name="business_fare" type="number" placeholder="Business Class Fare" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Economy Class Fare:</label><br />
+            <input class="form-control" id="input45" type="number" name="economy_fare" placeholder="Economy Class Fare" required/>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <button type="submit" class="btn btn-primary button3" style="width:25%" >Add Aircraft</button>
+        </div>
+        <br /><br />
+      </form>
+    </div>
+
+    <div class="modal fade" id="Modal41">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Added Successfully</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p id="message2"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close41" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+    $(document).ready(function() {
+      $('#welcomeModal').modal('show');
+    });
+    
+  </script>
+<!-- Button trigger modal -->
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#welcomeModal">
+  Welcome, Admin
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="welcomeModalLabel"></h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if ind == 0 %}
+          {% if messages %}
+            {% for m in messages %}
+              <p>{{m}}</p>
+            {% endfor %}
+          {% else %}
+            <p>Welcom admin</p>
+          {% endif %}
+        {% elif ind == 1 %}
+          <p>Occupancy rate : {{occupancy}}</p>
+        {% elif ind == 2 %}
+          <p>Net profit: {{profit}}</p>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!--                       Add-aircraft completed                  -->
+
+    <!--                          Add-aircraft-type                    -->
+    <div class="container bg text-white" style="width:40%;" id="add-aircraft-type">
+      <br />
+      <h2 style="text-align:center;">Add Aircraft Type</h2>
+      <br />
+      <br />
+      <form  action="{% url 'add_plane_type' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Aircraft Type:</label>
+            <input class="form-control" id="input51" name="type_" type="text" placeholder="Aircraft Type" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">First Class Capacity:</label><br />
+            <input class="form-control" id="input52" type="number" name="f_c" placeholder="First Class Capacity" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Business Class Capacity:</label><br />
+            <input class="form-control" id="input53" type="number" name="b_c" placeholder="Business Class Capacity" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Economy Class Capacity:</label>
+            <input class="form-control" id="input54" type="number" name="e_c" placeholder="Economy Class Capacity" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Basic Cost:</label>
+            <input class="form-control" id="input55" type="number" name="basic_cost" placeholder="Basic Cost" required/>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+            <label class="text-white fs-4">Fare(per km):</label>
+            <input class="form-control" id="input56" type="number" name="fareperkm" placeholder="Fare per kilometer" required/>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <button type="submit" class="btn btn-primary button4" style="width:35%" >Add Aircraft Type</button>
+        </div>
+        <br /><br />
+      </form>
+    </div>
+
+    <div class="modal fade" id="Modal51">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Added Successfully</h2>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body fs-4">
+            <p id="message3"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="close51" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--                          Add-aircraft-type completed                     -->
+
+    <!--                               Cancel-Flight                             -->
+  <div class="container text-white bg" style="width:35%" id="cancel-flight">
+       <br />
+       <h2 style="text-align:center">Cancel Flight</h2>
+       <br /><br />
+      <form action="{% url 'cancelflight' %}" method="post">
+        {% csrf_token %}
+       <div class="row">
+        <div class="col">
+          <label class="text-white fs-4">Flight Number:</label>
+          <input class="form-control" id="input61" type="text" name="flightid" placeholder="Flight ID" required/>
+        </div>
+      </div>
+    <br /><br />
+    <div class="row">
+      <div class="col">
+        <label class="text-white fs-4" for="Arrival-Day">Departure-Day:</label>
+        <input class="form-control" id="input62" name="dayofweek" style="color:navy; font-weight:bold" list="weeks3" type="text" placeholder="SELECT" required/>
+        <datalist id="weeks3">
+          <option value="Sunday">Sunday</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+        </datalist>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+     <div class="col">
+      <label class="text-white fs-4" for="Departure-Time">Departure-Time:</label>
+      <input class="form-control" id="input63" name="departuretime" type="time" step="1" style="color:navy; font-weight:bold" placeholder="Departure-Time" required/>
+     </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col">
+        <button type="sumbit" class="btn btn-primary button5" style="width:25%">Cancel Flight</button>
+      </div>
+    </div>
+    <br /><br />
+  </form>
+  </div>
+
+  <div class="modal fade" id="Modal61">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Cancelled Successfully</h2>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body fs-4">
+          <p id="message4"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="close61" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-white bg" style="width:45%" id="manage-fares">
+    <br />
+    <h2 style="text-align:center">Manage Fares</h2>
+    <br /><br /> 
+     <form action="{% url 'manage_fares' %}" method="post">
+      {% csrf_token %}
+       <div class="row">
+         <div class="col">
+            <label class="text-white fs-4" for="flight-number">Flight Number:</label>
+            <input class="form-control" id="input71" type="text" name="flight_id" placeholder="Flight ID" required/>
+         </div>
+       </div>
+       <br />
+       <br />
+       <div class="row">
+        <div class="col">
+           <label class="text-white fs-4">Update Economy Class Fare:</label>
+           <input class="form-control" id="input72" name="new_eco_fare" type="number" step="1" placeholder="ENTER" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+           <label class="text-white fs-4">Update Business Class Fare:</label>
+           <input class="form-control" id="input73" name="new_buis_fare" type="number" step="1" placeholder="ENTER" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+           <label class="text-white fs-4">Update First Class Fare:</label>
+           <input class="form-control" id="input74" name="new_first_fare" type="number" step="1" placeholder="ENTER" />
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row">
+        <div class="col">
+          <button type="sumbit" class="btn btn-primary button5" style="width:25%">Update Fares</button>
+        </div>
+      </div>
+      <br /><br />
+    </form>
+ </div>
+   <!--                               Cancel-Flight completed                          -->
+   <div class="container text-white bg" style="width:45%" id="manage-fpk">
+    <br />
+    <h2 style="text-align:center">Manage Fares of an Aircraft Type</h2>
+    <br /><br />
+    <form action="{% url 'manage_fareperkm' %}" method="post">
+      {% csrf_token %}
+       <div class="row">
+         <div class="col">
+            <label class="text-white fs-4">Aircraft-Type:</label>
+            <input class="form-control" type="text" name="type_" placeholder="Aicraft Type" required/>
+         </div>
+       </div>
+       <br />
+       <br />
+       <div class="row">
+        <div class="col">
+           <label class="text-white fs-4">Update Basic Cost:</label>
+           <input class="form-control" type="number" name="bc" step="1" placeholder="ENTER" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+           <label class="text-white fs-4">Update Fare per km:</label>
+           <input class="form-control" type="number" name="fpkm" placeholder="ENTER" />
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row">
+        <div class="col">
+          <button type="sumbit" class="btn btn-primary button5" style="width:25%">Update Fares</button>
+        </div>
+      </div>
+      <br /><br />
+    </form>
+ </div>
+
+</body>
+</html>

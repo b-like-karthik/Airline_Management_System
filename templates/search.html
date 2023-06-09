@@ -1,0 +1,67 @@
+
+<div class = 'search_flights'>
+    <br>
+    <div class="container-fluid bg-light" style="max-width:95%; border-radius: 5px;">
+        <br>
+        <h1 style="text-align:center">All the Available Flights</h1>
+        <br>
+        {% for fli in flight %}           
+                <div class="text-center">
+                    <div class="container bg-secondary" style="max-width:50%; border-radius: 5px; padding-top: 5px;">
+                        <h2 style="color:aliceblue" >Flight ID : {{ fli.plane_id}}</h2>
+                        <div class="container" style="max-width:70%">
+                            <ul class="list-group">
+                                <li class="list-group-item active" aria-current="true">Flight ID : {{ fli.plane_name }}</li>
+                                <li class="list-group-item" >From : {{ fli.departure }}</li>
+                                <li class="list-group-item">To : {{ fli.destination }}</li>
+                                
+                                <li class="list-group-item">Departure Time : {{fli.departure_time}}</li>
+                                <li class="list-group-item">Arrival Time : {{fli.arrival_time }}</li>
+                                {% if seat_number == 0 %}
+                                <li name = "eco_rem_seats">Business Class remaining seats : &#8377; {{ fli.business_seats_numbers_remanining}}</li>
+                                <li>First Class remaining seats : {{ fli.first_seats_numbers_remanining }}</li> 
+                                <li>Economy Class remaining seats : &#8377; {{ fli.economy_seats_numbers_remanining }}</li> 
+                                {% else %}
+                                <li class="list-group-item">  {{ seat_type }}</li>
+                                <li class="list-group-item"> seat number: {{ seat_number }}</li>
+                                {% endif %}
+                                <form action="{% url 'my'%}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="departure" value="{{ fli.departure }}">
+                                    <input type="hidden" name="departure_date" value="{{ fli.departure_date }}">
+                                    <input type="hidden" name="departure_time" value="{{ fli.departure_time }}">
+                                    <input type="hidden" name="plane_id" value="{{ fli.plane_id }}">
+                                    <input type="hidden" name="seat_no" value="{{ seat_number }}">
+                                    <input type="hidden" name="user_id" value="{{ user_id }}">
+                                    {% if seat_number == 0 %}
+                                    <span class="form-label">Travel class</span>
+                                        <select class="form-control" name="class_">
+                                            {% if fli.economy_seats_numbers_remanining > 0 %}
+                                                <option value="economy">Economy class</option>
+                                            {% endif %}
+                                            {% if fli.business_seats_numbers_remanining > 0 %}
+                                                <option value="business">Business class</option>
+                                            {% endif %}
+                                            {% if fli.first_seats_numbers_remanining > 0 %}
+                                                <option value="first">First class</option>
+                                            {% endif %}
+                                        </select>
+                                        <button type="submit" name="action" value="display">Display Seats</button>
+                                    <span class="select-arrow"></span>
+                                    {% endif %}
+                                    <button type="submit" name="action" value="book">Book</button>
+                                </form>                                       
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                    <hr>
+                </div>        
+            
+        {% endfor %}
+    </div>
+</div>
+
+
+
+

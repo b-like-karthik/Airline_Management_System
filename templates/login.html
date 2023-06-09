@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'login.css' %}"/>
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="background-image">
+      <div class="form-box">
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="departure" value="{{ flight.departure }}">
+          <input type="hidden" name="departure_date" value="{{ flight.departure_date }}">
+          <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+          <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+          <input type="hidden" name="seat_no" value="{{ seat_no }}">
+          <input type="hidden" name="ind" value="{{ ind }}">
+          <input type="hidden" name="seat_type" value="{{ seat_type }}">
+          <h1 class="Title">Login</h1>
+          <br /><br /><br />
+          <label class="form-details" for="Username">Username:</label>
+          <input class="form-details styling" type="text" name="user_id" placeholder="Enter your Username"/>
+          <br /><br />
+          <label class="form-details" for="Password">Password:</label>
+          <input class="form-details styling" type="Password" name="password" placeholder="Enter your Password"/>
+          <br />
+          <li><a href="#">forgot password?</a></li>
+          <br />
+          <button type="submit" class="btn btn-outline-light btn-lg px-5">Login</button>
+        </form>
+      <div>
+        {% for m in messages %}
+        <h3>{{m}}</h3>
+        {% endfor %}
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+{% extends 'block.html'%}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Matrix</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'seat.css' %}">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #dbe4ee;
+            background-size: cover;    
+        }
+        .seat-matrix{
+            
+            width: 100vw;
+            padding-bottom: 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .seat-matrix h1{
+            
+            font-family: Rubik;
+            margin: 5% 0;
+        }
+        .seat-info{
+            
+            font-family: Mukta;
+            width: 30%;
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
+            margin-bottom: 5%;
+        }
+        .info-sq{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .square {
+            
+            font-family: Mukta;
+            text-align: center;
+            cursor: not-allowed;
+            height: 30px;
+            width: 20px;
+            border: 0.1rem sold #c6bbf0;
+            border-radius: 0.1rem;
+            background-color: #6da18a;
+        }
+        .emp{
+            pointer-events: none;
+            cursor: pointer;
+            background-color: #0000003e;
+        }
+        hr{
+            border-color: rgb(33, 69, 116);
+            width:100%;
+            text-align:left;
+            margin-bottom: 5%;
+        }
+        .choose{
+            background-color: #f1a868;
+        }
+        .row-pattern{
+            width: 100%;
+            justify-content: space-evenly;
+            display: flex;
+        }
+        .col-pattern{
+            border-radius: 0.5rem;
+            border: 0.1rem solid black;
+            width: 30%;
+            padding: 5% 0;
+            justify-content: space-evenly;
+            gap: 2rem;
+            height:max-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .left-pattern,.right-pattern{
+            width: 30%;
+            justify-content: space-evenly;
+            display: flex;
+        }
+        @media only screen and (max-width: 1000px){
+            .row-pattern{
+                width: 50%;
+                justify-content: space-between;
+                display: flex;
+            }
+        }
+        @media only screen and (max-width: 650px){
+            .row-pattern{
+                width: 70%;
+                justify-content: space-between;
+                display: flex;
+            }
+        }
+        @media only screen and (max-width: 450px){
+            .row-pattern{
+                width: 90%;
+                justify-content: space-between;
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="seat-matrix">
+        <h1>{{seat_type}}</h1>
+        <!-- <hr> -->
+        <div class="seat-info">
+            <div class="info-sq">
+                <div class="square"></div>
+                <p>Available Seat</p>
+            </div>
+            <div class="info-sq">
+                <div class="square emp"></div>
+                
+                <p>Unavailable Seat</p>
+            </div>
+           
+        </div>
+        <div class="col-pattern">
+            {% for l in list4 %}  
+                                {% if l|add:"-1"|divisibleby:6 %}
+                                <div class="row-pattern">
+                                 <div class="left-pattern">  
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                {% elif l|add:"-2"|divisibleby:6 %}
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                {% elif l|add:"-3"|divisibleby:6 %}
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                 </div>  
+                                {% elif l|add:"-4"|divisibleby:6 %}
+                                <div class="right-pattern">
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                {% elif l|add:"-5"|divisibleby:6 %}
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                {% else %}
+                                    <form  action="{% url 'sn' l %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="departure" value="{{ flight.departure }}">
+                                        <input type="hidden" name="departure_date" value="{{ departure_date }}">
+                                        <input type="hidden" name="departure_time" value="{{ flight.departure_time }}">
+                                        <input type="hidden" name="plane_id" value="{{ flight.plane_id }}">
+                                        <input type="hidden" name="seat_type" value="{{ seat_type }}">
+                                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                                        <input type="hidden" name="cost" value="{{ cost }}">
+                                        <input type="hidden" name="ind" value="{{ ind }}">
+                                        <button class="square" type="submit" name="seat_no" value="{{ l }}" id={{l}}>{{l}}</button>
+                                    </form> 
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+            {% endfor %}
+        </div>
+    </div>
+</body>
+<script>
+    var my_list = JSON.parse('{{ list|safe }}')
+    for(var i=0;i<my_list.length;i++){
+        const ele=document.getElementById(`${my_list[i]}`);
+        ele.classList.add('emp');
+    }
+      
+</script>
+</html>
+{% endblock %}
